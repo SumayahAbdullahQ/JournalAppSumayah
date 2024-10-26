@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData // Import SwiftData
 
 @main
 struct JournalAppTestApp: App {
+    
+    // Register the model container for JournalEntry
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashScreen() // This is your main view
+                .modelContainer(for: [JournalEntry.self]) // Register the model container for the JournalEntry class
         }
     }
 }

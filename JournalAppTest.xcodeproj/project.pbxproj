@@ -14,6 +14,14 @@
 		58413D8A2CCA3BD500D2ADF1 /* JournalAppTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58413D892CCA3BD500D2ADF1 /* JournalAppTestTests.swift */; };
 		58413D942CCA3BD500D2ADF1 /* JournalAppTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58413D932CCA3BD500D2ADF1 /* JournalAppTestUITests.swift */; };
 		58413D962CCA3BD500D2ADF1 /* JournalAppTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58413D952CCA3BD500D2ADF1 /* JournalAppTestUITestsLaunchTests.swift */; };
+		58413DA32CCA3BF500D2ADF1 /* NewJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58413DA22CCA3BF500D2ADF1 /* NewJournal.swift */; };
+		58413DA52CCA3C2600D2ADF1 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58413DA42CCA3C2600D2ADF1 /* MainPage.swift */; };
+		58413DAA2CCA3D2800D2ADF1 /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58413DA92CCA3D2800D2ADF1 /* JournalEntry.swift */; };
+		58413DAC2CCA442700D2ADF1 /* JournalEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58413DAB2CCA442700D2ADF1 /* JournalEntryView.swift */; };
+		587972A62CCBE13100D6303B /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587972A52CCBE13100D6303B /* SplashScreen.swift */; };
+		587972A82CCBE16400D6303B /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587972A72CCBE16400D6303B /* EmptyState.swift */; };
+		58B6E3AB2CCBC53400C85519 /* EditJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B6E3AA2CCBC53400C85519 /* EditJournal.swift */; };
+		58C37B262CCD3EE0006CE8C5 /* BookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C37B252CCD3EE0006CE8C5 /* BookmarkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +52,14 @@
 		58413D8F2CCA3BD500D2ADF1 /* JournalAppTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JournalAppTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		58413D932CCA3BD500D2ADF1 /* JournalAppTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalAppTestUITests.swift; sourceTree = "<group>"; };
 		58413D952CCA3BD500D2ADF1 /* JournalAppTestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalAppTestUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		58413DA22CCA3BF500D2ADF1 /* NewJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewJournal.swift; sourceTree = "<group>"; };
+		58413DA42CCA3C2600D2ADF1 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
+		58413DA92CCA3D2800D2ADF1 /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
+		58413DAB2CCA442700D2ADF1 /* JournalEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryView.swift; sourceTree = "<group>"; };
+		587972A52CCBE13100D6303B /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		587972A72CCBE16400D6303B /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
+		58B6E3AA2CCBC53400C85519 /* EditJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditJournal.swift; sourceTree = "<group>"; };
+		58C37B252CCD3EE0006CE8C5 /* BookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +111,15 @@
 			isa = PBXGroup;
 			children = (
 				58413D782CCA3BD300D2ADF1 /* JournalAppTestApp.swift */,
+				587972A52CCBE13100D6303B /* SplashScreen.swift */,
+				587972A72CCBE16400D6303B /* EmptyState.swift */,
 				58413D7A2CCA3BD300D2ADF1 /* ContentView.swift */,
+				58413DA22CCA3BF500D2ADF1 /* NewJournal.swift */,
+				58413DA42CCA3C2600D2ADF1 /* MainPage.swift */,
+				58B6E3AA2CCBC53400C85519 /* EditJournal.swift */,
+				58413DAB2CCA442700D2ADF1 /* JournalEntryView.swift */,
+				58C37B252CCD3EE0006CE8C5 /* BookmarkManager.swift */,
+				58413DA92CCA3D2800D2ADF1 /* JournalEntry.swift */,
 				58413D7C2CCA3BD400D2ADF1 /* Assets.xcassets */,
 				58413D7E2CCA3BD400D2ADF1 /* Preview Content */,
 			);
@@ -257,8 +281,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				587972A62CCBE13100D6303B /* SplashScreen.swift in Sources */,
 				58413D7B2CCA3BD300D2ADF1 /* ContentView.swift in Sources */,
 				58413D792CCA3BD300D2ADF1 /* JournalAppTestApp.swift in Sources */,
+				58413DAA2CCA3D2800D2ADF1 /* JournalEntry.swift in Sources */,
+				58413DAC2CCA442700D2ADF1 /* JournalEntryView.swift in Sources */,
+				58413DA32CCA3BF500D2ADF1 /* NewJournal.swift in Sources */,
+				587972A82CCBE16400D6303B /* EmptyState.swift in Sources */,
+				58C37B262CCD3EE0006CE8C5 /* BookmarkManager.swift in Sources */,
+				58413DA52CCA3C2600D2ADF1 /* MainPage.swift in Sources */,
+				58B6E3AB2CCBC53400C85519 /* EditJournal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
