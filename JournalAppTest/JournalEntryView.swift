@@ -6,52 +6,65 @@
 //
 
 import SwiftUI
+import Combine
 
-struct JournalEntryView: View {
+// ViewModel
+class JournalEntryViewModel: ObservableObject {
+    @Published var isBookmarked: Bool
     var journalEntry: JournalEntry
-    @State private var isBookmarked = false // State to track bookmark status
+
     init(journalEntry: JournalEntry) {
         self.journalEntry = journalEntry
-        _isBookmarked = State(initialValue: BookmarkManager.loadBookmarkState(entryId: journalEntry.title)) // Or use an ID
+        self.isBookmarked = BookmarkManager.loadBookmarkState(entryId: journalEntry.title)
+    }
+    
+    func toggleBookmark() {
+        isBookmarked.toggle()
+        BookmarkManager.saveBookmarkState(entryId: journalEntry.title, isBookmarked: isBookmarked)
+    }
+}
+
+// View
+struct JournalEntryView: View {
+    @StateObject private var viewModel: JournalEntryViewModel
+
+    init(journalEntry: JournalEntry) {
+        _viewModel = StateObject(wrappedValue: JournalEntryViewModel(journalEntry: journalEntry))
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 // Journal Entry Title
-                Text(journalEntry.title)
+                Text(viewModel.journalEntry.title)
                     .font(.system(size: 24, weight: .semibold))
-                    .foregroundColor(Color(hex: "#D4C8FF")) // Title color as per the design
+                    .foregroundColor(Color(hex: "#D4C8FF"))
                 
                 Spacer() // Pushes bookmark to the right
                 
                 // Bookmark Icon (tap to toggle)
-                Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
-                    .foregroundColor(isBookmarked ? Color(hex: "#D4C8FF") : Color(hex: "#D4C8FF"))
+                Image(systemName: viewModel.isBookmarked ? "bookmark.fill" : "bookmark")
+                    .foregroundColor(Color(hex: "#D4C8FF"))
                     .font(.system(size: 24, weight: .regular))
                     .onTapGesture {
-                        isBookmarked.toggle() // Toggle bookmark state on tap
-                        BookmarkManager.saveBookmarkState(entryId: journalEntry.title, isBookmarked: isBookmarked)
+                        viewModel.toggleBookmark() // Use ViewModel to toggle bookmark
                     }
             }
 
             // Journal Entry Date
-            Text(journalEntry.date.formatted(date: .numeric, time: .omitted)) // Adjust date formatting if needed
+            Text(viewModel.journalEntry.date.formatted(date: .numeric, time: .omitted))
                 .font(.system(size: 14, weight: .regular))
-                .foregroundColor(Color(hex: "#9F9F9F")) // Date color
+                .foregroundColor(Color(hex: "#9F9F9F"))
             
             // Journal Entry Content Preview
-            Text(journalEntry.content)
+            Text(viewModel.journalEntry.content)
                 .font(.system(size: 18, weight: .regular))
                 .foregroundColor(Color(hex: "#FFFFFF"))
-//                .lineLimit(3) // Show only the first 3 lines for a preview
-//                .truncationMode(.tail) // Cut off content if too long
         }
-        .frame(maxWidth: .infinity, alignment: .leading) // Ensure it takes full width
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
         .background(Color(hex: "#171719"))
         .cornerRadius(10)
-        
     }
 }
 

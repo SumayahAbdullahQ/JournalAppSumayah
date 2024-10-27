@@ -6,12 +6,27 @@
 //
 
 import SwiftUI
+import Combine
 
+// ViewModel
+class SplashScreenViewModel: ObservableObject {
+    @Published var isActive = false
+
+    init() {
+        // Transition to the main page after 5 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.isActive = true
+        }
+    }
+}
+
+// View
 struct SplashScreen: View {
-    @State private var isActive = false
+    @StateObject private var viewModel = SplashScreenViewModel()
+    
     var body: some View {
         Group {
-            if isActive {
+            if viewModel.isActive {
                 MainPage()
             } else {
                 ZStack {
@@ -22,18 +37,12 @@ struct SplashScreen: View {
                             .imageScale(.large)
                             .foregroundStyle(.tint)
                         Text("Journali")
-                            .font(.system(size: 42,weight: .black))
+                            .font(.system(size: 42, weight: .black))
                             .foregroundColor(Color.white)
-                            .padding(.vertical,5)
+                            .padding(.vertical, 5)
                         Text("Your thoughts, your story")
-                            .font(.system(size: 18,weight: .light))
+                            .font(.system(size: 18, weight: .light))
                             .foregroundColor(Color.white)
-                    }
-                }
-                .onAppear {
-                    // Transition to JournalView after 5 seconds
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                        isActive = true
                     }
                 }
             }
