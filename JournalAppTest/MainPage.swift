@@ -7,22 +7,27 @@
 import SwiftUI
 import SwiftData
 
-struct MainPage: View {
-    @State private var searchText = ""
-    @State private var isPresentingNewJournal = false
+class MainPageViewModel: ObservableObject {
+    @Published  var searchText = ""
+    @Published  var isPresentingNewJournal = false
     // State variable for the dropdown menu
-    @State private var isMenuOpen = false
+    @Published  var isMenuOpen = false
+    
+}
+
+struct MainPage: View {
+    @StateObject /*private*/ var viewModel = MainPageViewModel()
     @Query var journalEntries: [JournalEntry] = []
     @Environment(\.modelContext) private var modelContext // Access the model context
     @State private var entryToEdit: JournalEntry? // Track the entry to edit
     
     var filteredEntries: [JournalEntry] {
-        if searchText.isEmpty {
+        if viewModel.searchText.isEmpty {
             return journalEntries
         } else {
             return journalEntries.filter { entry in
-                entry.title.localizedCaseInsensitiveContains(searchText) ||
-                entry.content.localizedCaseInsensitiveContains(searchText)
+                entry.title.localizedCaseInsensitiveContains(viewModel.searchText) ||
+                entry.content.localizedCaseInsensitiveContains(viewModel.searchText)
             }
         }
     }
@@ -43,7 +48,7 @@ struct MainPage: View {
                         
                         // Custom Search Bar
                         ZStack(alignment: .leading) {
-                            if searchText.isEmpty {
+                            if viewModel.searchText.isEmpty {
                                 Text("Search")
                                     .font(.system(size: 17, weight: .regular))
                                     .foregroundColor(Color(hex: "#EBEBF5")?.opacity(0.6))
@@ -54,7 +59,7 @@ struct MainPage: View {
                                 .foregroundColor(Color.gray)
                                 .padding(.leading, 20)
                             
-                            TextField("", text: $searchText)
+                            TextField("", text: $viewModel.searchText)
                                 .font(.system(size: 17, weight: .regular))
                                 .foregroundColor(Color(hex: "#FFFFFF"))
                                 .padding(.leading, 30)
@@ -118,8 +123,8 @@ struct MainPage: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
                             withAnimation {
-                                isMenuOpen.toggle()
-                                print("Menu toggled: \(isMenuOpen)")
+                                viewModel.isMenuOpen.toggle()
+                                print("Menu toggled: \(viewModel.isMenuOpen)")
                             }
                         }) {
                             Image(systemName: "line.3.horizontal.decrease")
@@ -134,7 +139,7 @@ struct MainPage: View {
                     // New Journal Button
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
-                            isPresentingNewJournal = true
+                            viewModel.isPresentingNewJournal = true
                         }) {
                             Image(systemName: "plus")
                                 .font(.system(size: 22, weight: .regular))
@@ -143,18 +148,18 @@ struct MainPage: View {
                                 .background(Color(hex: "#1F1F22"))
                                 .clipShape(Circle())
                         }
-                        .sheet(isPresented: $isPresentingNewJournal) {
+                        .sheet(isPresented: $viewModel.isPresentingNewJournal) {
                             NewJournal()
                         }
                     }
                 }
                 .overlay(
                     Group {
-                        if isMenuOpen {
+                        if viewModel.isMenuOpen {
                             VStack(spacing: 0) {
                                 Button(action: {
                                     print("Bookmark selected")
-                                    isMenuOpen = false
+                                    viewModel.isMenuOpen = false
                                 }) {
                                     Text("Bookmark")
                                         .font(.system(size: 14, weight: .regular))
@@ -168,7 +173,7 @@ struct MainPage: View {
                                 
                                 Button(action: {
                                     print("Journal Date selected")
-                                    isMenuOpen = false
+                                    viewModel.isMenuOpen = false
                                 }) {
                                     Text("Journal Date")
                                         .font(.system(size: 14, weight: .regular))
